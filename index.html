@@ -3,167 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بارق عداي | Portfolio</title>
+    <title>Barq Aday | Aquarius Universe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-gold: #c5a059;
-            --bg-color: #333333;
-            --card-bg: #3d3d3d;
-            --text-color: #ffffff;
-            --btn-border: #c5a059;
+            --bg: #001219;
+            --text: #f0f4f8;
+            --accent: #00b4d8;
+            --pearl: linear-gradient(135deg, #fff, #d1d1d1, #fff);
+            --card-bg: rgba(255, 255, 255, 0.05);
         }
 
         .light-mode {
-            --bg-color: #f0f0f0;
-            --text-color: #1a1a1a;
-            --card-bg: #e0e0e0;
+            --bg: #e0f2f1;
+            --text: #003049;
+            --accent: #0077be;
+            --card-bg: rgba(0, 119, 190, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; transition: 0.3s; }
-        
-        body { background-color: var(--bg-color); color: var(--text-color); text-align: center; }
 
-        header { 
-            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0,0,0,0.1); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
-        }
-        
-        .nav-right { display: flex; gap: 20px; align-items: center; }
-        .logo-text { color: var(--primary-gold); font-weight: 900; font-size: 1.4rem; letter-spacing: 1px; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        .insta-link { color: var(--primary-gold); font-size: 1.5rem; text-decoration: none; transition: 0.3s; }
-        .insta-link:hover { transform: scale(1.2); filter: brightness(1.2); }
-
-        .hero { padding: 60px 10%; }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; margin-bottom: 10px; }
-        .hero p { font-size: 1.1rem; opacity: 0.8; letter-spacing: 2px; margin-bottom: 40px; }
-
-        .stats-panel {
-            background: rgba(255,255,255,0.05); border-radius: 100px; padding: 25px 40px;
-            display: inline-flex; gap: 35px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px;
-        }
-        .stat-item h2 { font-size: 1.6rem; color: var(--primary-gold); }
-        .stat-item span { font-size: 0.75rem; opacity: 0.6; font-weight: 700; }
-
-        .btn-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 60px; }
-        .btn-oval {
-            padding: 14px 40px; border: 1.5px solid var(--btn-border); border-radius: 50px;
-            color: var(--primary-gold); text-decoration: none; font-weight: 900; background: transparent; cursor: pointer;
+        /* تأثير الخط اللؤلؤي */
+        .pearl-text {
+            background: var(--pearl);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
-        .section-title { font-size: 2.2rem; color: var(--primary-gold); margin-bottom: 10px; font-weight: 900; }
-        .title-line { width: 60px; height: 3px; background: var(--primary-gold); margin: 0 auto 50px; border-radius: 2px; }
+        /* الزر العائم لليلي والنهاري */
+        .theme-toggle {
+            position: fixed; top: 20px; left: 20px;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--accent); color: white;
+            border: none; cursor: pointer; z-index: 2000;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 8% 80px; }
+        header { padding: 40px 5%; text-align: center; }
+        .hero h1 { font-size: 4rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: var(--accent); letter-spacing: 2px; }
+
+        /* قسم جذب العميل */
+        .intro-text {
+            max-width: 800px; margin: 40px auto; padding: 0 20px;
+            text-align: center; font-size: 1.1rem; line-height: 1.8;
+        }
+
+        .projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; padding: 40px 5%; position: relative; z-index: 10;
+        }
+
         .project-card {
-            background: var(--card-bg); border-radius: 25px; padding: 40px;
-            border: 1px solid rgba(255,255,255,0.05); text-decoration: none; color: inherit;
+            background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px; padding: 30px; text-align: center;
+            backdrop-filter: blur(10px);
         }
-        .project-card i { font-size: 2.8rem; color: var(--primary-gold); margin-bottom: 20px; }
-        .project-card h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 900; }
-        .project-card p { font-size: 1rem; opacity: 0.7; line-height: 1.6; }
 
-        .theme-toggle { cursor: pointer; color: var(--primary-gold); font-size: 1.5rem; background: none; border: none; }
+        .main-icon { font-size: 3rem; margin-bottom: 15px; color: var(--accent); }
 
-        footer { padding: 50px 0; border-top: 1px solid rgba(255,255,255,0.05); opacity: 0.7; }
+        /* تأثير طفح الماء المطور */
+        .visit-btn {
+            position: relative; display: inline-block; padding: 12px 30px;
+            border: 2px solid var(--accent); border-radius: 50px;
+            color: var(--text); text-decoration: none; font-weight: bold;
+            overflow: hidden; z-index: 1; background: transparent;
+        }
 
-        /* تجميل نص التحميل */
-        #loading-msg { grid-column: 1 / -1; font-size: 1.2rem; color: var(--primary-gold); margin-top: 20px; }
+        .water-flood {
+            position: absolute; bottom: -100%; left: 0; width: 100%; height: 100%;
+            background: var(--accent); transition: 0.4s ease; z-index: -1;
+        }
 
-        @media (max-width: 768px) {
-            .stats-panel { padding: 20px; gap: 20px; border-radius: 50px; }
-            .hero h1 { font-size: 2.8rem; }
+        .visit-btn:active .water-flood { bottom: 0; }
+
+        /* نظام الأمواج في الأسفل */
+        .waves {
+            position: relative; width: 100%; height: 15vh;
+            margin-bottom: -7px; min-height: 100px; max-height: 150px;
+        }
+
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+        }
+        .parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+        .parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+        .parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+        .parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
+
+        @keyframes move-forever {
+            0% { transform: translate3d(-90px,0,0); }
+            100% { transform: translate3d(85px,0,0); }
+        }
+
+        footer {
+            background: var(--accent); color: white;
+            padding: 30px; text-align: center; font-weight: bold;
+        }
+
+        #toast {
+            position: fixed; bottom: 20px; right: 20px; background: white;
+            color: black; padding: 10px 20px; border-radius: 10px; display: none;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="nav-right">
-            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-adjust"></i></button>
-            <a href="https://www.instagram.com/4al_jaber?igsh=MWltN24ycjdhaWZmeg==" target="_blank" class="insta-link">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-        <div class="logo-text">BARQ ADAY</div>
-    </header>
+<button class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon" id="theme-icon"></i>
+</button>
 
-    <section class="hero">
-        <h1>بارق عداي</h1>
-        <p>SOFTWARE ENGINEER | UI/UX DESIGNER</p>
+<header class="hero">
+    <h1 class="pearl-text">برق جابر</h1>
+    <p>مبدع من برج الدلو | نحول الخيال إلى واقع رقمي</p>
+</header>
 
-        <div class="stats-panel">
-            <div class="stat-item"><h2>12+</h2><span>مشروع</span></div>
-            <div class="stat-item"><h2>2026</h2><span>البداية</span></div>
-            <div class="stat-item"><h2>100%</h2><span>جودة</span></div>
-        </div>
+<section class="intro-text">
+    <h2 class="pearl-text">لماذا تختار العمل معي؟</h2>
+    <p>
+        بصفتي من برج الدلو، أؤمن أن التصميم ليس مجرد ألوان، بل هو "تدفق" وابتكار. 
+        أقدم لك حلولاً معمارية وبرمجية تتسم بالذكاء والجمالية، حيث تلتقي الدقة التقنية بروح الفن. 
+        دعنا نجعل مشروعك يطفو فوق المنافسين.
+    </p>
+</section>
 
-        <div class="btn-group">
-            <button class="btn-oval">الخبرة</button>
-            <button class="btn-oval">المسيرة</button>
-        </div>
-    </section>
-
-    <h2 class="section-title">معرض المشاريع</h2>
-    <div class="title-line"></div>
-
-    <div class="grid" id="projects-container">
-        <p id="loading-msg">جاري تحميل المشاريع من السحاب...</p>
+<div class="projects-grid" id="data-container">
     </div>
 
-    <footer>
-        <p>© 2026 بارق عداي | جميع الحقوق محفوظة</p>
-    </footer>
+<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+<defs>
+<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+</defs>
+<g class="parallax">
+<use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(0,180,216,0.7" />
+<use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(0,180,216,0.5)" />
+<use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(0,180,216,0.3)" />
+<use xlink:href="#gentle-wave" x="48" y="7" fill="var(--accent)" />
+</g>
+</svg>
 
-    <script>
-        // رابط البيانات الخاص بك
-        const SHEET_ID = '1rC9gHgwX3SyP6TTVcMlTNOGlJXuUtKsRWCdxAemBYI4';
-        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+<footer>
+    <p>© 2026 جميع الحقوق محفوظة لـ برق جابر | Barq Aday</p>
+    <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.8;">صنع بشغف لبرج الدلو ♒</p>
+</footer>
 
-        async function loadProjects() {
-            try {
-                const response = await fetch(SHEET_URL);
-                const text = await response.text();
-                
-                // تنظيف رد غوغل لتحويله لـ JSON
-                const jsonData = JSON.parse(text.substr(47).slice(0, -2));
-                const rows = jsonData.table.rows;
-                
-                const container = document.getElementById('projects-container');
-                container.innerHTML = ''; // مسح رسالة التحميل
+<div id="toast">تم نسخ الإيميل.. تواصل معي الآن! 🌊</div>
 
-                rows.forEach(row => {
-                    // توزيع البيانات (تأكد أن ترتيب الأعمدة في الشيت هو: العنوان، الوصف، الرابط، الأيقونة)
-                    const title = row.c[0] ? row.c[0].v : 'مشروع جديد';
-                    const desc  = row.c[1] ? row.c[1].v : 'جاري العمل على الوصف...';
-                    const link  = row.c[2] ? row.c[2].v : '#';
-                    const icon  = row.c[3] ? row.c[3].v : 'fas fa-rocket';
-
-                    const projectCard = `
-                        <a href="${link}" target="_blank" class="project-card">
-                            <i class="${icon}"></i>
-                            <h3>${title}</h3>
-                            <p>${desc}</p>
-                        </a>
-                    `;
-                    container.innerHTML += projectCard;
-                });
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('loading-msg').innerText = 'فشل في الاتصال ببيانات غوغل.';
-            }
+<script>
+    // تغيير الثيم (ليلي/نهاري)
+    function toggleTheme() {
+        document.body.classList.toggle('light-mode');
+        const icon = document.getElementById('theme-icon');
+        if(document.body.classList.contains('light-mode')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
         }
+    }
 
-        // تشغيل الجلب التلقائي
-        loadProjects();
+    const SHEET_ID = '1rC9gHgwX3SyP6TTVcMlTNOGlJXuUtKsRWCdxAemBYI4';
+    const JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-        // وظيفة تبديل الوضع الليلي
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-        }
-    </script>
+    async function getSheetData() {
+        try {
+            const res = await fetch(JSON_URL);
+            const text = await res.text();
+            const data = JSON.parse(text.substr(47).slice(0, -2));
+            const rows = data.table.rows;
+            const container = document.getElementById('data-container');
+            container.innerHTML = '';
+
+            rows.forEach(row => {
+                const title = row.c[0]?.v || 'مشروع جديد';
+                const cat   = row.c[1]?.v || 'تصميم';
+                const link  = row.c[2]?.v || '#';
+                let icon    = row.c[3]?.v || 'fas fa-gem';
+
+                // ذكاء الأيقونات: إذا كان الاسم فيلا خلي الأيقونة بيت
+                if(title.includes("فيلا")) icon = "fas fa-home";
+
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.innerHTML = `
+                    <i class="${icon} main-icon"></i>
+                    <h3 class="pearl-text">${title}</h3>
+                    <p style="margin: 10px 0;">${cat}</p>
+                    <a href="${link}" target="_blank" class="visit-btn">
+                        تصفح العمل
+                        <span class="water-flood"></span>
+                    </a>
+                `;
+                container.appendChild(card);
+            });
+        } catch (e) { console.error("Error loading data"); }
+    }
+
+    function sendEmail() {
+        navigator.clipboard.writeText("barqaday@gmail.com");
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 3000);
+    }
+
+    getSheetData();
+</script>
 </body>
 </html>
